@@ -2,14 +2,13 @@
 
 import 'dart:convert';
 
+import 'package:billiard_management_mobile_app/src/api/user_api.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/home.dart';
 import 'package:billiard_management_mobile_app/src/pages/client/home.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
-import '../config.dart';
 import '../settings/settings_view.dart';
 
 class LoginPage extends StatefulWidget {
@@ -42,21 +41,19 @@ class _LoginPageState extends State<LoginPage> {
 
     if (_phoneController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty) {
-      var reqBody = {"phone": phone, "password": password};
-
-      var response = await http.post(Uri.parse(login),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode(reqBody));
+      var response = await UserAPI.loginRequest(phone, password);
 
       var jsonResponse = jsonDecode(response.body);
       if (jsonResponse['status']) {
         var myToken = jsonResponse['token'];
+        // Lưu token vào bộ nhớ
         prefs.setString('token', myToken);
 
-        // Kiểm tra role để chuyển trang
+        // giả mã token
         Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(myToken);
-        role = jwtDecodedToken['role'];
 
+        // kiểm tra quyền trước khi chuyển trang
+        role = jwtDecodedToken['role'];
         if (role == "admin" || role == "staff") {
           Navigator.push(
               context,
