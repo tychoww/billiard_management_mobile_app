@@ -6,6 +6,7 @@ import 'package:billiard_management_mobile_app/src/api/user_api.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/home.dart';
 import 'package:billiard_management_mobile_app/src/pages/client/home.dart';
 import 'package:billiard_management_mobile_app/src/pages/signup.dart';
+import 'package:billiard_management_mobile_app/src/pages/widgets/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,6 +19,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -51,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
         // Lưu token vào bộ nhớ
         prefs.setString('token', myToken);
 
-        // giả mã token
+        // giải mã token
         Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(myToken);
 
         // kiểm tra quyền trước khi chuyển trang
@@ -61,14 +63,18 @@ class _LoginPageState extends State<LoginPage> {
               context,
               MaterialPageRoute(
                   builder: (context) => AdminHomePage(token: myToken)));
+        } else {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ClientHomePage(token: myToken)));
         }
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ClientHomePage(token: myToken)));
       } else {
+        // ignore: avoid_print
         print('Something went wrong');
       }
+    } else {
+      CustomDialog.showErrorDialog(context, 'Vui lòng nhập đủ thông tin');
     }
   }
 

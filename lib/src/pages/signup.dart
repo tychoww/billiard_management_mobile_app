@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:billiard_management_mobile_app/src/api/user_api.dart';
-import 'package:billiard_management_mobile_app/src/pages/login.dart';
 import 'package:billiard_management_mobile_app/src/pages/widgets/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

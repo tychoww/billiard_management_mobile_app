@@ -1,4 +1,5 @@
 import 'package:billiard_management_mobile_app/src/pages/admin/home.dart';
+import 'package:billiard_management_mobile_app/src/pages/admin/table/table_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/client/home.dart';
 import 'package:billiard_management_mobile_app/src/pages/login.dart';
 import 'package:billiard_management_mobile_app/src/pages/signup.dart';
@@ -25,12 +26,17 @@ class MyApp extends StatelessWidget {
   // Hàm kiểm tra Default routes
   Widget _getDefaultPage() {
     if (token != null && JwtDecoder.isExpired(token) == false) {
-      if (token.role == "admin" || token.role == "staff") {
+      late String role;
+      // giải mã token
+      Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(token);
+      // kiểm tra quyền trước khi chuyển trang
+      role = jwtDecodedToken['role'];
+      if (role == "admin" || role == "staff") {
         return AdminHomePage(token: token);
       }
       return ClientHomePage(token: token);
     } else {
-      return LoginPage();
+      return const LoginPage();
     }
   }
 
@@ -68,13 +74,15 @@ class MyApp extends StatelessWidget {
                     return SettingsView(controller: settingsController);
                   // modify
                   case LoginPage.routeName:
-                    return LoginPage();
+                    return const LoginPage();
                   case SignUpPage.routeName:
-                    return SignUpPage();
+                    return const SignUpPage();
                   case ClientHomePage.routeName:
                     return ClientHomePage(token: token);
                   case AdminHomePage.routeName:
                     return AdminHomePage(token: token);
+                  case AdminTableListView.routeName:
+                    return const AdminTableListView();
                   default:
                     return _getDefaultPage();
                 }

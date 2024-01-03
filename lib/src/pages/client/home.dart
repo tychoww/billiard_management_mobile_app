@@ -1,4 +1,3 @@
-import 'package:billiard_management_mobile_app/src/helpers/user_helper.dart';
 import 'package:billiard_management_mobile_app/src/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -30,6 +29,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Trang chủ'),
         actions: [
           IconButton(
@@ -93,15 +93,6 @@ class _ClientHomePageState extends State<ClientHomePage> {
                   ),
                 ),
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextButton(
-                onPressed: () {
-                  UserHelper.logout(context);
-                },
-                child: const Text('Đăng xuất'),
-              ),
             ),
           ],
         ),

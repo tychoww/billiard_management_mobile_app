@@ -9,6 +9,7 @@ class UserHelper {
     });
 
     // Navigate back to the login page
+    // ignore: use_build_context_synchronously
     Navigator.pushReplacementNamed(context, LoginPage.routeName);
   }
 }

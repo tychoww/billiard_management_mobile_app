@@ -7,7 +7,8 @@ class CustomDialog extends StatelessWidget {
   final Color titleColor;
   final Color messageColor;
 
-  CustomDialog({
+  const CustomDialog({
+    super.key,
     required this.title,
     required this.message,
     required this.buttonText,
@@ -46,7 +47,7 @@ class CustomDialog extends StatelessWidget {
           message: message,
           buttonText: 'Đóng',
           titleColor: Colors.red,
-          messageColor: Colors.red[300]!,
+          messageColor: const Color.fromARGB(255, 0, 0, 0),
         );
       },
     );
@@ -61,7 +62,7 @@ class CustomDialog extends StatelessWidget {
           message: message,
           buttonText: 'Đóng',
           titleColor: Colors.green,
-          messageColor: Colors.green[300]!,
+          messageColor: const Color.fromARGB(255, 0, 0, 0),
         );
       },
     );
