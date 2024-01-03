@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:billiard_management_mobile_app/src/api/user_api.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/home.dart';
 import 'package:billiard_management_mobile_app/src/pages/client/home.dart';
+import 'package:billiard_management_mobile_app/src/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,10 +13,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../settings/settings_view.dart';
 
 class LoginPage extends StatefulWidget {
+  static const routeName = '/login';
+
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
-
-  static const routeName = '/login';
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -26,7 +29,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initSharedPref();
   }
@@ -43,8 +45,8 @@ class _LoginPageState extends State<LoginPage> {
         _passwordController.text.isNotEmpty) {
       var response = await UserAPI.loginRequest(phone, password);
 
-      var jsonResponse = jsonDecode(response.body);
-      if (jsonResponse['status']) {
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
         var myToken = jsonResponse['token'];
         // Lưu token vào bộ nhớ
         prefs.setString('token', myToken);
@@ -110,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   Navigator.restorablePushNamed(
                     context,
-                    LoginPage.routeName,
+                    SignUpPage.routeName,
                   );
                 },
                 child: const Text('Đăng ký'),

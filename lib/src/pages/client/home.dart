@@ -8,6 +8,7 @@ import '../../settings/settings_view.dart';
 class ClientHomePage extends StatefulWidget {
   static const routeName = 'client/home';
 
+  // ignore: prefer_typing_uninitialized_variables
   final token;
   const ClientHomePage({@required this.token, Key? key}) : super(key: key);
 
@@ -49,7 +50,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
                   padding: EdgeInsets.all(16.0),
                   child: Text(
                     'Phone: $phone',
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ),
                 IconButton(

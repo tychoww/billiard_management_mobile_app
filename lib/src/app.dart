@@ -1,6 +1,7 @@
 import 'package:billiard_management_mobile_app/src/pages/admin/home.dart';
 import 'package:billiard_management_mobile_app/src/pages/client/home.dart';
 import 'package:billiard_management_mobile_app/src/pages/login.dart';
+import 'package:billiard_management_mobile_app/src/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,6 +12,7 @@ import 'settings/settings_view.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final token;
   final SettingsController settingsController;
 
@@ -67,6 +69,8 @@ class MyApp extends StatelessWidget {
                   // modify
                   case LoginPage.routeName:
                     return LoginPage();
+                  case SignUpPage.routeName:
+                    return SignUpPage();
                   case ClientHomePage.routeName:
                     return ClientHomePage(token: token);
                   case AdminHomePage.routeName:

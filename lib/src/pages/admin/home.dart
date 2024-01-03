@@ -46,10 +46,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Text(
                     'Phone: $phone',
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ),
                 IconButton(
