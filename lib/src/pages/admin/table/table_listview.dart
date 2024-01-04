@@ -70,7 +70,7 @@ class _AdminTableListViewState extends State<AdminTableListView> {
                   ? const Center(child: CircularProgressIndicator())
                   : ListView.builder(
                       itemCount: tableList!.length,
-                      itemBuilder: (context, index) {
+                      itemBuilder: (context, int index) {
                         return Container(
                           decoration: BoxDecoration(
                             color: tableList![index]['isOpen']
@@ -92,7 +92,8 @@ class _AdminTableListViewState extends State<AdminTableListView> {
                                 IconButton(
                                   icon: const Icon(Icons.edit),
                                   onPressed: () {
-                                    // Xử lý khi nhấn nút Sửa
+                                    _showTableFormDialog(
+                                        context, tableList![index]['_id']);
                                   },
                                 ),
                                 IconButton(
@@ -121,7 +122,7 @@ class _AdminTableListViewState extends State<AdminTableListView> {
   }
 
   // Form nhập liệu cho bảng
-  void _showTableFormDialog(BuildContext context, int? index) {
+  void _showTableFormDialog(BuildContext context, index) {
     final TextEditingController tableNameController = TextEditingController();
     final TextEditingController tablePriceController = TextEditingController();
 
@@ -182,6 +183,9 @@ class _AdminTableListViewState extends State<AdminTableListView> {
                     tableNameController.text = "";
                     tablePriceController.text = "";
                   }
+                } else {
+                  CustomDialog.showErrorDialog(
+                      context, "Vui lòng điền đầy đủ thông tin!");
                 }
               },
             ),
@@ -207,13 +211,13 @@ class _AdminTableListViewState extends State<AdminTableListView> {
           content: Column(
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(hintText: "Tên món ăn"),
+                decoration: const InputDecoration(hintText: "Tên món ăn"),
                 onChanged: (value) {
                   // Cập nhật tên món ăn
                 },
               ),
               TextField(
-                decoration: InputDecoration(hintText: "Giá"),
+                decoration: const InputDecoration(hintText: "Giá"),
                 onChanged: (value) {
                   // Cập nhật giá
                 },

@@ -1,3 +1,4 @@
+import 'package:billiard_management_mobile_app/src/pages/admin/food/food_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/table/table_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/widgets/defaultFooter.dart';
 import 'package:flutter/material.dart';
@@ -99,7 +100,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // Xử lý khi nhấn nút Quản lý đồ ăn
+                        Navigator.restorablePushNamed(
+                          context,
+                          AdminFoodListView.routeName,
+                        );
                       },
                       child: const Text('Quản lý đồ ăn'),
                     ),

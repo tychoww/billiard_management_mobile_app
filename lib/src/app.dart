@@ -1,3 +1,4 @@
+import 'package:billiard_management_mobile_app/src/pages/admin/food/food_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/home.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/table/table_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/client/home.dart';
@@ -83,6 +84,8 @@ class MyApp extends StatelessWidget {
                     return AdminHomePage(token: token);
                   case AdminTableListView.routeName:
                     return const AdminTableListView();
+                  case AdminFoodListView.routeName:
+                    return const AdminFoodListView();
                   default:
                     return _getDefaultPage();
                 }

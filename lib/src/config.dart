@@ -9,3 +9,6 @@ const USER_API_URL = '${DOMAIN}users/';
 
 // ignore: constant_identifier_names
 const TABLE_API_URL = '${DOMAIN}tables/';
+
+// ignore: constant_identifier_names
+const FOOD_API_URL = '${DOMAIN}foods';
