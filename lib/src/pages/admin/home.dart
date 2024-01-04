@@ -20,6 +20,7 @@ class AdminHomePage extends StatefulWidget {
 class _AdminHomePageState extends State<AdminHomePage> {
   late String phone;
   late String fullname;
+  late String role;
   @override
   void initState() {
     super.initState();
@@ -27,6 +28,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
     Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
     phone = jwtDecodedToken['phone'];
     fullname = jwtDecodedToken['fullname'];
+    role = jwtDecodedToken['role'];
   }
 
   @override
@@ -99,30 +101,39 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       child: const Text('Đơn đặt bàn'),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        Navigator.restorablePushNamed(
-                          context,
-                          AdminFoodListView.routeName,
-                        );
-                      },
+                      onPressed: role != 'admin'
+                          ? null
+                          : () {
+                              // Xử lý khi nhấn nút Quản lý đồ ăn
+                              Navigator.restorablePushNamed(
+                                context,
+                                AdminFoodListView.routeName,
+                              );
+                            },
                       child: const Text('Quản lý đồ ăn'),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        // Xử lý khi nhấn nút Quản lý hoá đơn
-                      },
+                      onPressed: role != 'admin'
+                          ? null
+                          : () {
+                              // Xử lý khi nhấn nút Quản lý hoá đơn
+                            },
                       child: const Text('Quản lý hoá đơn'),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        // Xử lý khi nhấn nút Quản lý người dùng
-                      },
+                      onPressed: role != 'admin'
+                          ? null
+                          : () {
+                              // Xử lý khi nhấn nút Thống kê
+                            },
                       child: const Text('Thống kê'),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        // Xử lý khi nhấn nút Quản lý người dùng
-                      },
+                      onPressed: role != 'admin'
+                          ? null
+                          : () {
+                              // Xử lý khi nhấn nút Quản lý người dùng
+                            },
                       child: const Text('Quản lý người dùng'),
                     ),
                   ],

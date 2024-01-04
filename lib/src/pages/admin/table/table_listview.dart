@@ -9,20 +9,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // ignore: implementation_imports
 import 'package:http/src/response.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class AdminTableListView extends StatefulWidget {
   static const routeName = 'admin/table';
-  const AdminTableListView({Key? key}) : super(key: key);
+
+  // ignore: prefer_typing_uninitialized_variables
+  final token;
+  const AdminTableListView({@required this.token, Key? key}) : super(key: key);
 
   @override
   State<AdminTableListView> createState() => _AdminTableListViewState();
 }
 
 class _AdminTableListViewState extends State<AdminTableListView> {
+  late String role;
   List? tableList;
 
   @override
   void initState() {
+    Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
+    role = jwtDecodedToken['role'];
+
     super.initState();
     getTableList();
   }
@@ -59,10 +67,13 @@ class _AdminTableListViewState extends State<AdminTableListView> {
           children: [
             // Header
             DefaultHeader(
-                title: 'Danh sách bàn',
-                onAdd: () {
-                  _showTableFormDialog(context, null);
-                }),
+              title: 'Danh sách bàn',
+              onAdd: role != 'admin'
+                  ? () {} // Provide a non-nullable function for the disabled case
+                  : () {
+                      _showTableFormDialog(context, null);
+                    },
+            ),
             // Body
             Expanded(
               flex: 8,
@@ -91,16 +102,20 @@ class _AdminTableListViewState extends State<AdminTableListView> {
                               children: <Widget>[
                                 IconButton(
                                   icon: const Icon(Icons.edit),
-                                  onPressed: () {
-                                    _showTableFormDialog(
-                                        context, tableList![index]['_id']);
-                                  },
+                                  onPressed: role != 'admin'
+                                      ? null
+                                      : () {
+                                          _showTableFormDialog(context,
+                                              tableList![index]['_id']);
+                                        },
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.delete),
-                                  onPressed: () {
-                                    // Xử lý khi nhấn nút Xóa
-                                  },
+                                  onPressed: role != 'admin'
+                                      ? null
+                                      : () {
+                                          // Xử lý khi nhấn nút Xóa
+                                        },
                                 ),
                                 ElevatedButton(
                                   onPressed: () {},

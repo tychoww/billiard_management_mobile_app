@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
                   case AdminHomePage.routeName:
                     return AdminHomePage(token: token);
                   case AdminTableListView.routeName:
-                    return const AdminTableListView();
+                    return AdminTableListView(token: token);
                   case AdminFoodListView.routeName:
                     return const AdminFoodListView();
                   default:
