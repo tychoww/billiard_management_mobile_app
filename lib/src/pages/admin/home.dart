@@ -1,5 +1,6 @@
 import 'package:billiard_management_mobile_app/src/pages/admin/food/food_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/table/table_listview.dart';
+import 'package:billiard_management_mobile_app/src/pages/admin/user/user_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/widgets/defaultFooter.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -133,6 +134,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           ? null
                           : () {
                               // Xử lý khi nhấn nút Quản lý người dùng
+                              Navigator.restorablePushNamed(
+                                context,
+                                AdminUserListView.routeName,
+                              );
                             },
                       child: const Text('Quản lý người dùng'),
                     ),
