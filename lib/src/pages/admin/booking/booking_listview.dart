@@ -121,9 +121,9 @@ class _AdminBookingListViewState extends State<AdminBookingListView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    'Thời gian đặt: ${bookingList![index]['createdDate']}'),
+                                    'Thời gian đặt: ${DateTimeConverter.fromMongoDBDisplayText(bookingList![index]['createdDate'])}'),
                                 Text(
-                                    'Thời gian đến: ${bookingList![index]['arrivalTime']}'),
+                                    'Thời gian đến: ${DateTimeConverter.fromMongoDBDisplayText(bookingList![index]['arrivalTime'])}'),
                               ],
                             ),
                             trailing: Row(
