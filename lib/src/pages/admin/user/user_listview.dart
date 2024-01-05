@@ -32,7 +32,7 @@ class _AdminUserListViewState extends State<AdminUserListView> {
       var response = await UserAPI.getAllUserRequest();
       var jsonResponse = jsonDecode(response.body);
       setState(() {
-        userList = jsonResponse;
+        userList = jsonResponse['data'];
       });
     } catch (error) {
       print("Error fetching user list: $error");

@@ -1,4 +1,4 @@
-import 'package:billiard_management_mobile_app/src/pages/login.dart';
+import 'package:billiard_management_mobile_app/src/pages/client/booking/booking_listview.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
@@ -16,13 +16,17 @@ class ClientHomePage extends StatefulWidget {
 }
 
 class _ClientHomePageState extends State<ClientHomePage> {
-  late String phone;
+  late String currentUserPhone;
+  late String currentUserFullName;
+  late String currentUserID;
   @override
   void initState() {
     super.initState();
 
     Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
-    phone = jwtDecodedToken['phone'];
+    currentUserPhone = jwtDecodedToken['phone'];
+    currentUserFullName = jwtDecodedToken['fullname'];
+    currentUserID = jwtDecodedToken['_id'];
   }
 
   @override
@@ -47,10 +51,10 @@ class _ClientHomePageState extends State<ClientHomePage> {
             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    'Phone: $phone',
-                    style: const TextStyle(fontSize: 20),
+                    'Xin chào: $currentUserFullName ($currentUserPhone)',
+                    style: const TextStyle(fontSize: 15),
                   ),
                 ),
                 IconButton(
@@ -61,14 +65,14 @@ class _ClientHomePageState extends State<ClientHomePage> {
                 ),
               ],
             ),
-            Column(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: () {
                     Navigator.restorablePushNamed(
                       context,
-                      LoginPage.routeName,
+                      ClientBookingListView.routeName,
                     );
                   },
                   child: const SizedBox(
@@ -79,19 +83,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    // Xử lý khi nhấn nút Kiểm tra bàn của bạn
-                  },
-                  child: const SizedBox(
-                    width: 150,
-                    height: 150,
-                    child: Center(
-                      child: Text('Kiểm tra bàn của bạn'),
-                    ),
-                  ),
-                ),
+                const SizedBox(height: 20)
               ],
             ),
           ],

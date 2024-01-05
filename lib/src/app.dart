@@ -1,7 +1,9 @@
+import 'package:billiard_management_mobile_app/src/pages/admin/booking/booking_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/food/food_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/home.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/table/table_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/user/user_listview.dart';
+import 'package:billiard_management_mobile_app/src/pages/client/booking/booking_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/client/home.dart';
 import 'package:billiard_management_mobile_app/src/pages/login.dart';
 import 'package:billiard_management_mobile_app/src/pages/signup.dart';
@@ -81,6 +83,8 @@ class MyApp extends StatelessWidget {
                     return const SignUpPage();
                   case ClientHomePage.routeName:
                     return ClientHomePage(token: token);
+                  case ClientBookingListView.routeName:
+                    return ClientBookingListView(token: token);
                   case AdminHomePage.routeName:
                     return AdminHomePage(token: token);
                   case AdminTableListView.routeName:
@@ -89,6 +93,8 @@ class MyApp extends StatelessWidget {
                     return const AdminFoodListView();
                   case AdminUserListView.routeName:
                     return const AdminUserListView();
+                  case AdminBookingListView.routeName:
+                    return const AdminBookingListView();
                   default:
                     return _getDefaultPage();
                 }

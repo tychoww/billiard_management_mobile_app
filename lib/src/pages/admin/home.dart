@@ -1,3 +1,4 @@
+import 'package:billiard_management_mobile_app/src/pages/admin/booking/booking_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/food/food_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/table/table_listview.dart';
 import 'package:billiard_management_mobile_app/src/pages/admin/user/user_listview.dart';
@@ -98,6 +99,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     ElevatedButton(
                       onPressed: () {
                         // Xử lý khi nhấn nút Quản lý bàn
+                        Navigator.restorablePushNamed(
+                          context,
+                          AdminBookingListView.routeName,
+                        );
                       },
                       child: const Text('Đơn đặt bàn'),
                     ),
