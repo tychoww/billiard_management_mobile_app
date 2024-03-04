@@ -215,14 +215,12 @@ class _AdminFoodListViewState extends State<AdminFoodListView> {
                           selectedTypeOfFood = newValue;
                         });
                       },
-                      items: [
+                      items: const [
                         DropdownMenuItem<String>(
-                          key: UniqueKey(),
                           value: 'eating',
                           child: Text('Đồ ăn'),
                         ),
                         DropdownMenuItem<String>(
-                          key: UniqueKey(),
                           value: 'drinking',
                           child: Text('Đồ uống'),
                         ),
@@ -258,9 +256,6 @@ class _AdminFoodListViewState extends State<AdminFoodListView> {
                         response = await FoodAPI.addNewFoodRequest(foodName,
                             selectedTypeOfFood!, int.parse(foodPrice));
                       } else {
-                        setState(() {
-                          selectedTypeOfFood = foodName;
-                        });
                         // Cập nhật
                         response = await FoodAPI.updateFoodRequest(
                             foodID,
