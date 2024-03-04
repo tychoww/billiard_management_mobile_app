@@ -215,12 +215,14 @@ class _AdminFoodListViewState extends State<AdminFoodListView> {
                           selectedTypeOfFood = newValue;
                         });
                       },
-                      items: const [
+                      items: [
                         DropdownMenuItem<String>(
+                          key: UniqueKey(),
                           value: 'eating',
                           child: Text('Đồ ăn'),
                         ),
                         DropdownMenuItem<String>(
+                          key: UniqueKey(),
                           value: 'drinking',
                           child: Text('Đồ uống'),
                         ),
